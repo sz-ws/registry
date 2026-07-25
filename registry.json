@@ -96,9 +96,9 @@
       "id": "cron",
       "kind": "code",
       "name": "Cron",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "coreApi": "^1.0.0",
-      "description": "Minute-precision scheduled task trigger: an external companion worker drives core's task expiration scan via signed callback.",
+      "description": "Minute-precision scheduled tasks. Ships its own Cloudflare cron trigger (wrangler triggers.crons -> scheduled handler -> signed callback), with an external companion worker kept as a fallback for non-Workers schedulers.",
       "author": "kuosuko",
       "license": "MIT",
       "category": "utility",
@@ -109,7 +109,16 @@
       ],
       "deployment": "code-only",
       "repository": "https://github.com/kuosuko/registry",
-      "iconUrl": "icon.png"
+      "iconUrl": "icon.png",
+      "files": [
+        "index.ts",
+        "provider.ts",
+        "scheduled.ts",
+        "admin-page.tsx",
+        "worker/README.md",
+        "worker/index.js",
+        "worker/wrangler.jsonc"
+      ]
     },
     {
       "id": "google-login",
@@ -168,7 +177,14 @@
       ],
       "deployment": "code-only",
       "repository": "https://github.com/kuosuko/registry",
-      "iconUrl": "icon.png"
+      "iconUrl": "icon.png",
+      "files": [
+        "index.ts",
+        "adapter.ts",
+        "crypto.ts",
+        "admin-page.tsx",
+        "README.md"
+      ]
     }
   ]
 }

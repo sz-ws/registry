@@ -2,10 +2,10 @@
   "kind": "code",
   "id": "cron",
   "name": "Cron",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "coreApi": "^1.0.0",
-  "description": "分鐘級準時排程入口:外部 companion worker 以簽章回呼催動 core 的到期任務掃描。",
-  "install": "npx suko add cron",
+  "description": "分鐘級準時排程:自帶 Cloudflare cron trigger(wrangler triggers.crons → scheduled handler → 簽章回呼),外部 companion worker 保留為非 Workers 排程器的備選方案。",
+  "install": "npx @sz-ws/cms add cron",
   "author": {
     "name": "kuosuko",
     "url": "https://suko.tw"
@@ -19,5 +19,14 @@
     "jobs"
   ],
   "deployment": "code-only",
-  "iconUrl": "icon.png"
+  "iconUrl": "icon.png",
+  "files": [
+    "index.ts",
+    "provider.ts",
+    "scheduled.ts",
+    "admin-page.tsx",
+    "worker/README.md",
+    "worker/index.js",
+    "worker/wrangler.jsonc"
+  ]
 }
