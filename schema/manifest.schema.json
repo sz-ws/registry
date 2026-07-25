@@ -843,6 +843,13 @@
           "type": "boolean",
           "description": "A (docs/spec-declarative-notify-schedule.md, CORE_API 1.11.0): best-effort notification email sent after a successful public create. Recipient is the core.notifyEmail setting (empty = disabled). Only takes effect when `public` is true."
         },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "content",
+            "submission"
+          ]
+        },
         "layout": {
           "$ref": "#/$defs/formLayout"
         }
