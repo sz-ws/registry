@@ -31,7 +31,7 @@
       "id": "blog",
       "kind": "declarative",
       "name": "Blog",
-      "version": "1.2.4",
+      "version": "1.2.5",
       "coreApi": "^1.17.0",
       "description": "Declarative port of the code `posts` extension: draft/published blog posts with public list + detail pages, running on the generic content engine.",
       "author": "kuosuko",

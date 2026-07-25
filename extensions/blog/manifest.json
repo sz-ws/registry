@@ -5,7 +5,7 @@
     "en": "Blog",
     "zh-Hant": "部落格"
   },
-  "version": "1.2.4",
+  "version": "1.2.5",
   "coreApi": "^1.17.0",
   "description": {
     "en": "Declarative port of the code `posts` extension: draft/published blog posts with public list + detail pages, running on the generic content engine.",
@@ -77,8 +77,8 @@
           "key": "publishedAt",
           "type": "date",
           "label": {
-            "en": "Published",
-            "zh-Hant": "已發布"
+            "en": "Publish date",
+            "zh-Hant": "發布日期"
           }
         }
       ],
