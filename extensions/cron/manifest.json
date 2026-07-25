@@ -18,5 +18,6 @@
     "scheduling",
     "jobs"
   ],
-  "deployment": "code-only"
+  "deployment": "code-only",
+  "iconUrl": "icon.png"
 }

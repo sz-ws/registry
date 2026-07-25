@@ -128,5 +128,6 @@
     "admin-pages",
     "public-routes"
   ],
-  "iconUrl": "icon.png"
+  "iconUrl": "icon.png",
+  "banner": "banner.png"
 }

@@ -193,5 +193,6 @@
       "reason": "Minute-precision scheduled publishing (core lazy sweep remains the fallback)"
     }
   ],
-  "iconUrl": "icon.png"
+  "iconUrl": "icon.png",
+  "banner": "banner.png"
 }

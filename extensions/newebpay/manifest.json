@@ -18,5 +18,6 @@
     "newebpay",
     "taiwan"
   ],
-  "deployment": "code-only"
+  "deployment": "code-only",
+  "iconUrl": "icon.png"
 }

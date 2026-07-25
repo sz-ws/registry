@@ -132,6 +132,7 @@
     }
   ],
   "iconUrl": "icon.png",
+  "banner": "banner.png",
   "schedule": [
     {
       "id": "purge-old-submissions",

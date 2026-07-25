@@ -54,5 +54,6 @@
       "secret": true,
       "default": ""
     }
-  ]
+  ],
+  "iconUrl": "icon.png"
 }
