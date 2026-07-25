@@ -1,3 +1,6 @@
-
-# public template 純 code:markdown 不進版控
-*.md
+# markdown 進版控。
+#
+# 這個 repo 是 extension 作者的入口 —— README 說明 registry 格式與 manifest 形狀,
+# 沒有它,GitHub 上點進來是一棵裸的檔案樹。先前的 `*.md` 全域忽略正是這個結果。
+node_modules/
+.DS_Store
