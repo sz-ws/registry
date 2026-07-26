@@ -16,7 +16,7 @@
         "portfolio"
       ],
       "deployment": "instant",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "capabilities": [
         "contents",
         "media",
@@ -44,7 +44,7 @@
         "og-image"
       ],
       "deployment": "instant",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "capabilities": [
         "contents",
         "media",
@@ -80,7 +80,7 @@
         "webhook"
       ],
       "deployment": "instant",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "capabilities": [
         "contents",
         "public-create",
@@ -108,7 +108,7 @@
         "jobs"
       ],
       "deployment": "code-only",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "iconUrl": "icon.png",
       "files": [
         "index.ts",
@@ -137,7 +137,7 @@
         "google"
       ],
       "deployment": "instant",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "iconUrl": "icon.png"
     },
     {
@@ -157,7 +157,7 @@
         "line"
       ],
       "deployment": "instant",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "iconUrl": "icon.png"
     },
     {
@@ -176,7 +176,7 @@
         "taiwan"
       ],
       "deployment": "code-only",
-      "repository": "https://github.com/kuosuko/registry",
+      "repository": "https://github.com/sz-ws/registry",
       "iconUrl": "icon.png",
       "files": [
         "index.ts",

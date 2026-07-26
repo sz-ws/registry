@@ -16,7 +16,7 @@
   "category": "integration",
   "tags": ["auth", "login", "oidc", "google"],
   "deployment": "instant",
-  "repository": "https://github.com/kuosuko/registry",
+  "repository": "https://github.com/sz-ws/registry",
   "loginProvider": {
     "issuer": "https://accounts.google.com",
     "button": {

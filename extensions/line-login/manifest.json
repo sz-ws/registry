@@ -16,7 +16,7 @@
   "category": "integration",
   "tags": ["auth", "login", "oidc", "line"],
   "deployment": "instant",
-  "repository": "https://github.com/kuosuko/registry",
+  "repository": "https://github.com/sz-ws/registry",
   "loginProvider": {
     "issuer": "https://access.line.me",
     "scopes": ["openid", "profile", "email"],

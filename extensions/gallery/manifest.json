@@ -112,7 +112,7 @@
     "name": "kuosuko",
     "url": "https://suko.tw"
   },
-  "repository": "https://github.com/kuosuko/registry",
+  "repository": "https://github.com/sz-ws/registry",
   "license": "MIT",
   "category": "media",
   "tags": [
