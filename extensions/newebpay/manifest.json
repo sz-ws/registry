@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "coreApi": "^1.14.0",
   "description": "藍新金流(NewebPay MPG)payment provider:測試/正式雙環境、MPG form-post checkout、Notify 驗簽冪等結算、ReturnURL 結果頁。掛在 core payment-kit 引擎上的 adapter。",
-  "install": "npx @sz-ws/cms add newebpay",
+  "install": "npx @sz.ws/cms add newebpay",
   "author": {
     "name": "kuosuko",
     "url": "https://suko.tw"
