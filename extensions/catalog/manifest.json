@@ -1,0 +1,200 @@
+{
+  "kind": "declarative",
+  "id": "catalog",
+  "name": {
+    "en": "Catalog",
+    "zh-Hant": "商品目錄"
+  },
+  "version": "0.1.0",
+  "coreApi": "^1.17.0",
+  "description": {
+    "en": "A shared product catalogue: products with price, image, category and public list/detail pages. Other extensions read it as the content type `catalog.product`.",
+    "zh-Hant": "共用的商品目錄:商品含價格、圖片、分類與公開列表/詳情頁。其他 extension 以內容型別 `catalog.product` 讀取它。"
+  },
+  "icon": "package",
+  "contentTypes": [
+    {
+      "name": "product",
+      "label": {
+        "en": "Product",
+        "zh-Hant": "商品"
+      },
+      "slugField": "name",
+      "fields": [
+        {
+          "key": "name",
+          "type": "text",
+          "required": true,
+          "label": {
+            "en": "Name",
+            "zh-Hant": "商品名稱"
+          }
+        },
+        {
+          "key": "slug",
+          "type": "slug",
+          "label": "Slug"
+        },
+        {
+          "key": "price",
+          "type": "number",
+          "label": {
+            "en": "Price (whole units)",
+            "zh-Hant": "價格(整數)"
+          }
+        },
+        {
+          "key": "image",
+          "type": "media",
+          "label": {
+            "en": "Image",
+            "zh-Hant": "商品圖"
+          }
+        },
+        {
+          "key": "category",
+          "type": "text",
+          "label": {
+            "en": "Category",
+            "zh-Hant": "分類"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "text",
+          "label": {
+            "en": "Summary",
+            "zh-Hant": "一句話簡介"
+          }
+        },
+        {
+          "key": "body",
+          "type": "richtext",
+          "label": {
+            "en": "Description",
+            "zh-Hant": "商品說明"
+          }
+        }
+      ],
+      "layout": {
+        "kind": "manual",
+        "groups": [
+          {
+            "fields": [
+              "name"
+            ]
+          },
+          {
+            "fields": [
+              "slug",
+              "category"
+            ]
+          },
+          {
+            "fields": [
+              "price"
+            ]
+          },
+          {
+            "fields": [
+              "summary"
+            ],
+            "fullWidth": true
+          },
+          {
+            "fields": [
+              "image"
+            ],
+            "fullWidth": true
+          },
+          {
+            "fields": [
+              "body"
+            ],
+            "fullWidth": true
+          }
+        ],
+        "wide": []
+      }
+    }
+  ],
+  "settings": [
+    {
+      "key": "currency",
+      "label": {
+        "en": "Currency",
+        "zh-Hant": "幣別"
+      },
+      "type": "select",
+      "options": [
+        {
+          "value": "TWD",
+          "label": "TWD"
+        },
+        {
+          "value": "USD",
+          "label": "USD"
+        },
+        {
+          "value": "JPY",
+          "label": "JPY"
+        }
+      ],
+      "default": "TWD"
+    },
+    {
+      "key": "perPage",
+      "label": {
+        "en": "Products per page",
+        "zh-Hant": "每頁商品數"
+      },
+      "type": "number",
+      "default": 12
+    }
+  ],
+  "adminPages": [
+    {
+      "slug": "",
+      "title": {
+        "en": "Products",
+        "zh-Hant": "商品"
+      },
+      "view": "collection",
+      "contentType": "product",
+      "layout": "table"
+    }
+  ],
+  "publicRoutes": [
+    {
+      "pattern": "/products",
+      "view": "list",
+      "contentType": "product",
+      "layout": "grid"
+    },
+    {
+      "pattern": "/products/:slug",
+      "view": "detail",
+      "contentType": "product"
+    }
+  ],
+  "author": {
+    "name": "kuosuko",
+    "url": "https://suko.tw"
+  },
+  "repository": "https://github.com/sz-ws/registry",
+  "license": "MIT",
+  "category": "commerce",
+  "tags": [
+    "catalog",
+    "products",
+    "commerce"
+  ],
+  "deployment": "instant",
+  "capabilities": [
+    "contents",
+    "media",
+    "settings",
+    "admin-pages",
+    "public-routes"
+  ]
+}

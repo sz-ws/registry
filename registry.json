@@ -1,6 +1,31 @@
 {
   "extensions": [
     {
+      "id": "catalog",
+      "kind": "declarative",
+      "name": "Catalog",
+      "version": "0.1.0",
+      "coreApi": "^1.17.0",
+      "description": "A shared product catalogue: products with price, image, category and public list/detail pages. Other extensions read it as the content type `catalog.product`.",
+      "author": "kuosuko",
+      "license": "MIT",
+      "category": "commerce",
+      "tags": [
+        "catalog",
+        "products",
+        "commerce"
+      ],
+      "deployment": "instant",
+      "repository": "https://github.com/sz-ws/registry",
+      "capabilities": [
+        "contents",
+        "media",
+        "settings",
+        "admin-pages",
+        "public-routes"
+      ]
+    },
+    {
       "id": "gallery",
       "kind": "declarative",
       "name": "Gallery",
