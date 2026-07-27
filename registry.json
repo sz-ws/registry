@@ -5,7 +5,7 @@
       "kind": "declarative",
       "name": "Catalog",
       "version": "0.1.0",
-      "coreApi": "^1.17.0",
+      "coreApi": "^1.25.0",
       "description": "A shared product catalogue: products with price, image, category and public list/detail pages. Other extensions read it as the content type `catalog.product`.",
       "author": "kuosuko",
       "license": "MIT",
@@ -15,7 +15,7 @@
         "products",
         "commerce"
       ],
-      "deployment": "instant",
+      "deployment": "progressive",
       "repository": "https://github.com/sz-ws/registry",
       "capabilities": [
         "contents",
@@ -23,6 +23,10 @@
         "settings",
         "admin-pages",
         "public-routes"
+      ],
+      "files": [
+        "index.ts",
+        "ProductGrid.tsx"
       ]
     },
     {

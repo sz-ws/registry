@@ -6,7 +6,7 @@
     "zh-Hant": "商品目錄"
   },
   "version": "0.1.0",
-  "coreApi": "^1.17.0",
+  "coreApi": "^1.25.0",
   "description": {
     "en": "A shared product catalogue: products with price, image, category and public list/detail pages. Other extensions read it as the content type `catalog.product`.",
     "zh-Hant": "共用的商品目錄:商品含價格、圖片、分類與公開列表/詳情頁。其他 extension 以內容型別 `catalog.product` 讀取它。"
@@ -189,12 +189,16 @@
     "products",
     "commerce"
   ],
-  "deployment": "instant",
+  "deployment": "progressive",
   "capabilities": [
     "contents",
     "media",
     "settings",
     "admin-pages",
     "public-routes"
+  ],
+  "files": [
+    "index.ts",
+    "ProductGrid.tsx"
   ]
 }

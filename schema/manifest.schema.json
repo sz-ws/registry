@@ -100,6 +100,17 @@
       ],
       "description": "instant = usable immediately; progressive = usable after install but full experience needs a rebuild; code-only = must rebuild."
     },
+    "files": {
+      "maxItems": 64,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120,
+        "pattern": "^[a-zA-Z0-9._-]+(\\/[a-zA-Z0-9._-]+)*$"
+      },
+      "description": "1.25.0: optional code-enhancement layer, as paths relative to the registry's extensions/<id>/files/. The declarative half still hot-installs and works on its own; these files are fetched by `sz-ws-cms add <id>` and only light up after a rebuild + deploy, registering view overrides via the (extId, surfaceId) registry in src/ext/overrides.ts. Removing them falls back to the generic views -- progressive is additive, never a one-way eject. Paths are allow-listed ([a-zA-Z0-9._-] and '/'); zod additionally rejects any '..' segment, which this pattern alone cannot express. A manifest using this field must declare coreApi \"^1.25.0\"."
+    },
     "installPrompts": {
       "type": "array",
       "items": {
