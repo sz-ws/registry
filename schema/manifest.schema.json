@@ -74,7 +74,31 @@
     },
     "icon": {
       "type": "string",
+      "maxLength": 16384,
       "description": "Declarative extension icon hint (lucide token). Used for admin sidebar / menus."
+    },
+    "menu": {
+      "type": "object",
+      "properties": {
+        "section": {
+          "type": "string",
+          "enum": [
+            "content",
+            "commerce",
+            "system"
+          ]
+        },
+        "parent": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,30}$"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      },
+      "additionalProperties": false
     },
     "iconUrl": {
       "type": "string",
@@ -360,6 +384,15 @@
       ],
       "additionalProperties": false,
       "description": "spec-login-providers.md §4 (CORE_API 1.16.0): declarative third-party OIDC login. `issuer` is the OIDC issuer (discovery is fetched by the engine); `scopes` defaults to [openid, profile, email]. Client id/secret are NOT declared here -- they use the existing settings[] convention (clientId text, clientSecret secret:true), read by the engine at ext.<extId>.clientId / .clientSecret. button.svg is validated by an allowlist svg-guard at parse time (zod refine, dropped by z.toJSONSchema; the maxLength 4000 pattern is enforced but the tag/attribute allowlist is not expressible in JSON Schema). Adding this field is a CORE_API minor bump (1.14.0 -> 1.16.0, 1.15.0 reserved for extension i18n): a manifest using it must declare coreApi \"^1.16.0\"."
+    },
+    "scripts": {
+      "minItems": 1,
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scriptEntry"
+      },
+      "description": "1.48.0: scripts added to every public page (never admin pages). Nothing runs until an admin reviews and approves them; the approval is tied to a SHA-256 of this array, so any change needs a new approval. The registry source must also allow scripts. {{settings.<key>}} must name a declared, non-secret setting; values are URL-encoded in src and inserted as escaped JSON literals in inline code. Inline code may also use {{content.<type>}} (published entries of a declared, non-inbox content type, or <extId>.<type> of another extension, which yields titles only) and {{feed.<extId>.<name>}} (a code extension's public feed). These cross-checks are zod superRefine rules, not expressible in JSON Schema. A manifest using this field must declare coreApi \"^1.48.0\"."
     }
   },
   "$defs": {
@@ -1547,6 +1580,46 @@
       ],
       "additionalProperties": false,
       "description": "One declarative scheduled action, interpreted into an Extension.jobs entry and executed by the ext-jobs core job (docs/spec-extension-jobs.md). `id` must be unique across schedule[] (zod array refine; not expressible in JSON Schema)."
+    },
+    "scriptEntry": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^https:\\/\\/[a-z0-9-]+(?:\\.[a-z0-9-]+)+(?::\\d{1,5})?\\/[^\\s\"'<>\\\\]*$"
+        },
+        "inline": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000,
+          "not": {
+            "pattern": "</script|<!--"
+          }
+        },
+        "domains": {
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:\\*\\.)?[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "description": "One script for public pages: either `src` (https URL loaded with async; the host is written out, {{settings.<key>}} may appear only in the path or query) or `inline` code. `domains` lists other hosts it talks to, shown on the approval screen.",
+      "oneOf": [
+        {
+          "required": [
+            "src"
+          ]
+        },
+        {
+          "required": [
+            "inline"
+          ]
+        }
+      ]
     }
   }
 }
