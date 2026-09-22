@@ -5,11 +5,11 @@
     "en": "Catalog",
     "zh-Hant": "商品目錄"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "coreApi": "^1.25.0",
   "description": {
-    "en": "A shared product catalogue: products with price, image, category and public list/detail pages. Other extensions read it as the content type `catalog.product`.",
-    "zh-Hant": "共用的商品目錄:商品含價格、圖片、分類與公開列表/詳情頁。其他 extension 以內容型別 `catalog.product` 讀取它。"
+    "en": "A shared product catalogue: products with price, image and a category picked from a managed list, plus public list/detail pages. Other extensions read it as the content types `catalog.product` and `catalog.category`.",
+    "zh-Hant": "共用的商品目錄:商品含價格、圖片,分類從後台維護的清單挑選,並有公開列表/詳情頁。其他 extension 以內容型別 `catalog.product`、`catalog.category` 讀取它。"
   },
   "icon": "package",
   "contentTypes": [
@@ -53,7 +53,8 @@
         },
         {
           "key": "category",
-          "type": "text",
+          "type": "relation",
+          "to": "catalog.category",
           "label": {
             "en": "Category",
             "zh-Hant": "分類"
@@ -116,6 +117,30 @@
         ],
         "wide": []
       }
+    },
+    {
+      "name": "category",
+      "label": {
+        "en": "Category",
+        "zh-Hant": "分類"
+      },
+      "slugField": "name",
+      "fields": [
+        {
+          "key": "name",
+          "type": "text",
+          "required": true,
+          "label": {
+            "en": "Name",
+            "zh-Hant": "分類名稱"
+          }
+        },
+        {
+          "key": "slug",
+          "type": "slug",
+          "label": "Slug"
+        }
+      ]
     }
   ],
   "settings": [
@@ -161,6 +186,16 @@
       },
       "view": "collection",
       "contentType": "product",
+      "layout": "table"
+    },
+    {
+      "slug": "categories",
+      "title": {
+        "en": "Categories",
+        "zh-Hant": "分類"
+      },
+      "view": "collection",
+      "contentType": "category",
       "layout": "table"
     }
   ],
