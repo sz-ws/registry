@@ -23,6 +23,12 @@
       "pattern": "^[a-z][a-z0-9-]{1,30}$",
       "description": "Extension id. Full content type keys become '<id>.<typeName>'."
     },
+    "identity": {
+      "type": "string",
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*\\/[a-z][a-z0-9-]{1,30}$",
+      "description": "1.50.0: global identity '<publisher>/<name>' (publisher: lowercase letters/digits in segments joined by single '.' or '-', e.g. 'sz-ws' or 'example.com'; name follows the extension id rule). Fixed once installed: an install or update whose identity differs from (or drops) the installed one is refused (409 identity_mismatch). `id` stays the site-local key. A manifest using this field must declare coreApi \"^1.50.0\"."
+    },
     "name": {
       "anyOf": [
         {
@@ -165,6 +171,14 @@
         "$ref": "#/$defs/requiresEntry"
       },
       "description": "Service/provider requirements (deliberately separate axis from capabilities): capabilities is core's static feature table, requires is 'which provider must be present' (providers.ts capability registry, e.g. email:send, cron:tick). A non-optional entry that is absent blocks install; an optional one just surfaces a suggestion in the UI."
+    },
+    "requiresExtensions": {
+      "maxItems": 16,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/requiredExtension"
+      },
+      "description": "1.50.0: other extensions this one needs (code or declarative), separate from `requires` (service providers). A non-optional entry that is not installed and enabled blocks install (409 missing_extensions with the ids). Must not list itself or the same id twice (zod superRefine). A manifest using this field must declare coreApi \"^1.50.0\"."
     },
     "author": {
       "type": "object",
@@ -1391,6 +1405,51 @@
       },
       "required": [
         "capability"
+      ],
+      "additionalProperties": false
+    },
+    "requiredExtension": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,30}$",
+          "description": "Site-local id of the required extension (code or declarative)."
+        },
+        "identity": {
+          "type": "string",
+          "maxLength": 96,
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*\\/[a-z][a-z0-9-]{1,30}$",
+          "description": "Optional global identity of the required extension ('<publisher>/<name>'). When both this and the installed extension carry an identity, they must match; an installed extension without an identity is matched by id alone."
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "true = works without it (the store shows it as optional). Absent/false = install is refused (409 missing_extensions) until it is installed and enabled."
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "object",
+              "properties": {
+                "en": {
+                  "type": "string"
+                },
+                "zh-Hant": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          ],
+          "description": "User-facing explanation shown on the store detail page."
+        }
+      },
+      "required": [
+        "id"
       ],
       "additionalProperties": false
     },
