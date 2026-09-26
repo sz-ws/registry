@@ -161,6 +161,26 @@
       "iconUrl": "icon.png"
     },
     {
+      "id": "firebase-login",
+      "kind": "declarative",
+      "name": "Firebase Login",
+      "version": "1.0.0",
+      "coreApi": "^1.54.0",
+      "description": "Sign in with Google through Firebase Authentication, for sites whose users already have accounts in a Firebase project.",
+      "author": "kuosuko",
+      "license": "MIT",
+      "category": "integration",
+      "tags": [
+        "auth",
+        "login",
+        "firebase",
+        "google"
+      ],
+      "deployment": "instant",
+      "repository": "https://github.com/sz-ws/registry",
+      "iconUrl": "icon.png"
+    },
+    {
       "id": "newebpay",
       "kind": "code",
       "name": "NewebPay 藍新金流",

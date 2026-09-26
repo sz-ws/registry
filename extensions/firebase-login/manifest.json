@@ -1,0 +1,80 @@
+{
+  "kind": "declarative",
+  "id": "firebase-login",
+  "name": {
+    "en": "Firebase Login",
+    "zh-Hant": "Firebase 登入"
+  },
+  "version": "1.0.0",
+  "coreApi": "^1.54.0",
+  "description": {
+    "en": "Sign in with Google through Firebase Authentication, for sites whose users already have accounts in a Firebase project. New sign-ins register as guests; a member whose email was already verified on this site signs in to that account.",
+    "zh-Hant": "透過 Firebase Authentication 用 Google 登入，適合使用者已經在 Firebase 專案裡的網站。第一次登入會註冊為訪客；已經是會員、而且 Email 在這個網站驗證過的，直接登入那個帳號。"
+  },
+  "author": {
+    "name": "kuosuko"
+  },
+  "license": "MIT",
+  "category": "integration",
+  "tags": [
+    "auth",
+    "login",
+    "firebase",
+    "google"
+  ],
+  "deployment": "instant",
+  "repository": "https://github.com/sz-ws/registry",
+  "loginProvider": {
+    "firebase": {
+      "signIn": "google.com"
+    },
+    "button": {
+      "label": "使用 Google 繼續",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#EA4335\" d=\"M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2 0 24 0 14.6 0 6.4 5.4 2.5 13.3l7.8 6c1.9-5.6 7.1-9.8 13.7-9.8z\"/><path fill=\"#4285F4\" d=\"M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.1 5.3-4.6 7l7.1 5.5c4.1-3.8 6.5-9.5 6.5-16z\"/><path fill=\"#FBBC05\" d=\"M10.3 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.8-6C.9 16.5 0 20.1 0 24s.9 7.5 2.5 10.7l7.8-6z\"/><path fill=\"#34A853\" d=\"M24 48c6.2 0 11.4-2 15.2-5.5l-7.1-5.5c-2 1.3-4.6 2.1-8.1 2.1-6.6 0-11.8-4.2-13.7-9.8l-7.8 6C6.4 42.6 14.6 48 24 48z\"/></svg>",
+      "background": "#ffffff",
+      "foreground": "#1f1f1f"
+    }
+  },
+  "settings": [
+    {
+      "key": "apiKey",
+      "label": {
+        "en": "API key",
+        "zh-Hant": "API 金鑰"
+      },
+      "description": {
+        "en": "apiKey from the Firebase console: Project settings → General → Your apps.",
+        "zh-Hant": "Firebase 主控台「專案設定 → 一般 → 你的應用程式」裡的 apiKey。"
+      },
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "authDomain",
+      "label": {
+        "en": "Auth domain",
+        "zh-Hant": "驗證網域"
+      },
+      "description": {
+        "en": "authDomain from the same place, e.g. my-app.firebaseapp.com. Add this site's domain under Authentication → Settings → Authorized domains.",
+        "zh-Hant": "同一個地方的 authDomain，例如 my-app.firebaseapp.com。另外要在 Authentication →「設定 → 已授權網域」加上這個網站的網域。"
+      },
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "projectId",
+      "label": {
+        "en": "Project ID",
+        "zh-Hant": "專案 ID"
+      },
+      "description": {
+        "en": "projectId from the same place. Google must be turned on under Authentication → Sign-in method.",
+        "zh-Hant": "同一個地方的 projectId。Authentication →「登入方式」要開啟 Google。"
+      },
+      "type": "text",
+      "default": ""
+    }
+  ],
+  "iconUrl": "icon.png"
+}
