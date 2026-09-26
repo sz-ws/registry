@@ -366,6 +366,21 @@
             "minLength": 1
           }
         },
+        "firebase": {
+          "type": "object",
+          "properties": {
+            "signIn": {
+              "type": "string",
+              "enum": [
+                "google.com"
+              ]
+            }
+          },
+          "required": [
+            "signIn"
+          ],
+          "additionalProperties": false
+        },
         "button": {
           "type": "object",
           "properties": {
@@ -393,11 +408,10 @@
         }
       },
       "required": [
-        "issuer",
         "button"
       ],
       "additionalProperties": false,
-      "description": "spec-login-providers.md §4 (CORE_API 1.16.0): declarative third-party OIDC login. `issuer` is the OIDC issuer (discovery is fetched by the engine); `scopes` defaults to [openid, profile, email]. Client id/secret are NOT declared here -- they use the existing settings[] convention (clientId text, clientSecret secret:true), read by the engine at ext.<extId>.clientId / .clientSecret. button.svg is validated by an allowlist svg-guard at parse time (zod refine, dropped by z.toJSONSchema; the maxLength 4000 pattern is enforced but the tag/attribute allowlist is not expressible in JSON Schema). Adding this field is a CORE_API minor bump (1.14.0 -> 1.16.0, 1.15.0 reserved for extension i18n): a manifest using it must declare coreApi \"^1.16.0\"."
+      "description": "spec-login-providers.md §4 (CORE_API 1.16.0): declarative third-party OIDC login. `issuer` is the OIDC issuer (discovery is fetched by the engine); `scopes` defaults to [openid, profile, email]. Client id/secret are NOT declared here -- they use the existing settings[] convention (clientId text, clientSecret secret:true), read by the engine at ext.<extId>.clientId / .clientSecret. button.svg is validated by an allowlist svg-guard at parse time (zod refine, dropped by z.toJSONSchema; the maxLength 4000 pattern is enforced but the tag/attribute allowlist is not expressible in JSON Schema). Adding this field is a CORE_API minor bump (1.14.0 -> 1.16.0, 1.15.0 reserved for extension i18n): a manifest using it must declare coreApi \"^1.16.0\". 1.54.0: instead of `issuer`, `firebase: { signIn: \"google.com\" }` declares Firebase Authentication (the browser signs in with the Firebase SDK, the server verifies the Firebase ID token). Exactly one of issuer/firebase; scopes only with issuer. A Firebase provider declares text settings apiKey, authDomain and projectId (the public web config) instead of clientId/clientSecret, and must declare coreApi \"^1.54.0\". These cross-checks are zod superRefine rules, not expressible in JSON Schema."
     },
     "scripts": {
       "minItems": 1,
