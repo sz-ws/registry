@@ -223,7 +223,7 @@
         "type": "string",
         "minLength": 1
       },
-      "description": "Discoverability tags: search matching + detail page chips."
+      "description": "Discoverability tags (<=8): search matching; the store shows the first 3 on the card and all of them on the detail page, and choosing one filters the store."
     },
     "category": {
       "type": "string",
@@ -233,8 +233,69 @@
         "commerce",
         "integration",
         "utility",
-        "theme"
-      ]
+        "theme",
+        "auth",
+        "marketing",
+        "analytics"
+      ],
+      "description": "Store category, the store's primary navigation. 1.58.0 adds auth (sign-in & members), marketing and analytics; a manifest using one of those three must declare coreApi \"^1.58.0\" (zod superRefine). Values a store does not know are listed under a neutral 'Other'."
+    },
+    "highlights": {
+      "minItems": 1,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "zh-Hant": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "description": "1.58.0: short points for the store's detail page (1-6 lines, each <=80 characters, single line). Plain text only: the store escapes it and never renders HTML or Markdown; text that looks like an HTML tag is rejected (zod refine, not expressible in JSON Schema). Each line may be a localized object; every locale value has the same limits. A manifest using this field must declare coreApi \"^1.58.0\"."
+    },
+    "details": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        {
+          "type": "object",
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1200
+            },
+            "zh-Hant": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1200
+            }
+          },
+          "additionalProperties": false
+        }
+      ],
+      "description": "1.58.0: longer description for the store's detail page (<=1200 characters). Plain text; a blank line starts a new paragraph. The store escapes it and never renders HTML or Markdown; text that looks like an HTML tag is rejected (zod refine). May be a localized object; every locale value has the same limit. A manifest using this field must declare coreApi \"^1.58.0\"."
     },
     "support": {
       "type": "object",
