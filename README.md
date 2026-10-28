@@ -20,6 +20,8 @@ registry/
     blog/
       manifest.json            # code extension metadata stub
       files/                   # full source tree, copied into extensions/<id>/ by the CLI
+      versions/<x.y.z>/        # archived older versions (manifest.json, files/, style.css)
+  tools/release.mjs            # archive step for a release, see "Releasing a new version"
   README.md
 ```
 
@@ -44,6 +46,9 @@ Top-level `extensions` array. Each entry:
 - `version` — exact semver of the published manifest.
 - `coreApi` — semver range (`^x.y.z`, `~x.y.z`, exact, or `>=x.y.z`) checked
   against the installing CMS's `CORE_API_VERSION`.
+- `versions`: optional. The archived older versions of this extension, newest
+  first, never the latest. See "Archived versions".
+- `files`: code extensions only. The files the CLI installs, relative to `files/`.
 
 ## Manifest format
 
@@ -75,6 +80,8 @@ For each configured source, it fetches:
 
 - `<base>/registry.json` — to list available extensions (admin `Browse` tab).
 - `<base>/extensions/<id>/manifest.json` — to install a specific extension.
+- `<base>/extensions/<id>/versions/<x.y.z>/manifest.json` to install an
+  archived version (see below).
 
 Fetches are https-only, restricted to configured sources (no arbitrary URLs
 from a request), capped at 1 MB, and JSON-parsed inside a try/catch.
@@ -93,11 +100,70 @@ The admin `Browse` tab shows an Install/Update button for declarative
 entries; code entries show the `npx @sz.ws/cms add <id>` command to copy instead,
 with install disabled from the UI.
 
+## Archived versions
+
+`extensions/<id>/` always holds the latest version. An older version is kept
+only when compatibility breaks: when a release raises the `coreApi` floor (the
+minimum version of the range: `^1.79.0`, `~1.79.0`, `>=1.79.0` and `1.79.0` all
+start at 1.79.0), the version it replaces moves to
+`extensions/<id>/versions/<x.y.z>/`, so sites on an older core can still
+install it. The number of kept versions follows the number of breaks, not the
+number of releases.
+
+```
+extensions/<id>/versions/<x.y.z>/manifest.json   the manifest as it was
+extensions/<id>/versions/<x.y.z>/files/...       its source (code extensions)
+extensions/<id>/versions/<x.y.z>/style.css       only if the extension had one
+```
+
+Store images (icon, banner, screenshots) are not archived. The index lists
+archived versions in the entry's `versions`, newest first:
+
+```json
+{ "id": "newebpay", "version": "0.4.0", "coreApi": "^1.80.0",
+  "versions": [ { "version": "0.3.0", "coreApi": "^1.79.0", "files": ["index.ts", "adapter.ts"] } ] }
+```
+
+- `files` is that version's own file list (present when the entry has `files`);
+  the CLI installs exactly the listed files.
+- A site installs the latest version if its `CORE_API_VERSION` satisfies the
+  latest `coreApi`, otherwise the first entry of `versions` it satisfies. If
+  none, the extension is not installable there.
+- Clients that do not read `versions` ignore it and see only the latest.
+- At most one archived version per floor (the newest); archived versions whose
+  floor is not below the latest's are deleted, since the latest covers them.
+
+## Releasing a new version
+
+Bump `version` (and `coreApi` if needed) in `extensions/<id>/manifest.json`,
+change the code, then before committing:
+
+```bash
+node tools/release.mjs <id>
+```
+
+It compares the working-tree manifest with the one at git `HEAD`. Only if the
+`coreApi` floor rose, it copies the `HEAD` version into
+`versions/<old version>/` (taken from git, so uncommitted edits are not
+archived). It then prunes `versions/` as above and updates the `registry.json`
+entry: `version`, `coreApi` and `versions`. A version's `files` list comes from
+the index entry at `HEAD`. Running it twice before committing gives the same
+result; it stops if the version was not bumped.
+
+```bash
+node tools/release.mjs --check   # registry.json and versions/ agree (CI)
+node --test                      # tests for the release step
+```
+
+Edit anything else in `registry.json` (description, `files` of the latest
+version) by hand as before.
+
 ## Running your own registry
 
 1. Fork this repo (or copy the `registry/` directory into your own repo).
 2. Add/edit entries in `registry.json` and their corresponding
-   `extensions/<id>/manifest.json` (and `files/` for code extensions).
+   `extensions/<id>/manifest.json` (and `files/` for code extensions). For a
+   new version of an existing extension, run `node tools/release.mjs <id>`.
 3. In your CMS instance, set `core.registrySources` (admin settings) to
    include your fork's raw base URL, e.g.:
    `https://raw.githubusercontent.com/<you>/<your-fork>/main`
