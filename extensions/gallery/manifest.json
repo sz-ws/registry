@@ -5,8 +5,8 @@
     "en": "Gallery",
     "zh-Hant": "相片集"
   },
-  "version": "1.2.4",
-  "coreApi": "^1.17.0",
+  "version": "1.2.5",
+  "coreApi": ">=1.17.0",
   "description": {
     "en": "Photo gallery with street/studio tagging, admin collection view, and public list/detail pages.",
     "zh-Hant": "帶有街景/棚拍標籤、管理者集合檢視和公開列表/詳細內容頁面的相片集。"

@@ -5,8 +5,8 @@
     "en": "Contact",
     "zh-Hant": "聯絡"
   },
-  "version": "1.3.3",
-  "coreApi": "^1.17.0",
+  "version": "1.3.4",
+  "coreApi": ">=1.17.0",
   "description": {
     "en": "Have questions? Leave a message and we'll get back to you as soon as possible.",
     "zh-Hant": "有任何問題歡迎留言,我們會盡快回覆。"

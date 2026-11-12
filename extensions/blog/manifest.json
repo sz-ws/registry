@@ -5,8 +5,8 @@
     "en": "Blog",
     "zh-Hant": "部落格"
   },
-  "version": "1.2.6",
-  "coreApi": "^1.17.0",
+  "version": "1.2.7",
+  "coreApi": ">=1.17.0",
   "description": {
     "en": "Declarative port of the code `posts` extension: draft/published blog posts with public list + detail pages, running on the generic content engine.",
     "zh-Hant": "程式碼式 posts 擴展的宣告式移植:包含草稿/已發布文章,提供公開列表及詳細內容頁面,運行在通用內容引擎上。"
